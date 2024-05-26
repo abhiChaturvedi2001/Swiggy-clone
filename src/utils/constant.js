@@ -24,11 +24,7 @@ export const navLinks = [
         linksName: "Sign In",
         linksLogo: "RiUserSearchLine"
     },
-    {
-        id: 6,
-        linksName: "Cart",
-        linksLogo: "PiShoppingBagOpenThin"
-    }
+   
 ]
 
 export const foodChoice = [

@@ -8,10 +8,13 @@ import { FaPhabricator } from "react-icons/fa";
 import { RiMenu3Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { handleSingInToggle, handleToggle } from "../utils/ToggleSlice";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const tog = useSelector((store) => store.toggle.navbarValue);
+  const cartData = useSelector((store) => store.datas.cartData);
+
   // function of rendring the icons
   const renderIcon = (iconName) => {
     switch (iconName) {
@@ -35,18 +38,21 @@ const Navbar = () => {
     dispatch(handleToggle());
   };
 
+  // handling signinPage 
   const handleSignInPage = (id) => {
     dispatch(handleSingInToggle(id));
   };
   return (
     <>
       {/* website navbar */}
-      <nav className="flex  items-center justify-around py-3 shadow-lg font-font-Poppin max-lg:justify-between max-lg:px-8 ">
-        <img
-          src="https://cdn.worldvectorlogo.com/logos/swiggy-1.svg"
-          alt=""
-          className="logo w-[40px]"
-        />
+      <nav className="flex  items-center justify-around py-3 shadow-xl font-font-Poppin max-lg:justify-between max-lg:px-8 ">
+        <Link to="/">
+          <img
+            src="https://cdn.worldvectorlogo.com/logos/swiggy-1.svg"
+            alt=""
+            className="logo w-[40px]"
+          />
+        </Link>
         <ul className="flex items-center space-x-4 max-lg:hidden">
           {navLinks.map((links) => {
             return (
@@ -64,6 +70,13 @@ const Navbar = () => {
               </>
             );
           })}
+          <Link to={"/checkout"}>
+            {" "}
+            <li className="flex space-x-2 font-semibold hover:text-orange-600 cursor-pointer font-font-Poppins items-center">
+              <PiShoppingBagOpenThin />
+              <span>Cart ({cartData.length === 0 ? 0 : cartData.length}) </span>
+            </li>
+          </Link>
         </ul>
         <RiMenu3Line
           onClick={handlingToggle}

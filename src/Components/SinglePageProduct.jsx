@@ -44,7 +44,6 @@ const SinglePageProduct = () => {
     );
   };
 
-  if (menuData.length === 0) return <h1>loading......</h1>;
   if (restaurantInfoData.length === 0) return <h1>loading.....</h1>;
   if (nonVegData.length === 0) return <h1>loading.....</h1>;
 
@@ -57,12 +56,16 @@ const SinglePageProduct = () => {
     city,
     areaName,
   } = restaurantInfoData;
+
   const { slaString } = restaurantInfoData?.sla;
   const { message } = restaurantInfoData?.feeDetails;
+
+  // this function is to remove the html tags from API
   const removeHTMLTags = (message) => {
     return message.replace(/<\/?b>/g, "");
   };
   const sanitizedData = removeHTMLTags(message);
+
   return (
     <>
       <div className="flex items-center space-x-3 mx-auto w-[55rem] my-10 font-font-Poppins font-bold ">
@@ -72,7 +75,7 @@ const SinglePageProduct = () => {
         <h1>{city} / </h1>
         <h1>{name} </h1>
       </div>
-      <div className="mx-auto w-[55rem]   mt-5">
+      <div className="mx-auto w-[55rem] mt-5">
         <div className="main-container">
           <h1 className="text-2xl font-font-Poppins font-bold">{name}</h1>
           <div className="border shadow-lg rounded-2xl px-3 py-3 my-4">
@@ -115,16 +118,17 @@ const SinglePageProduct = () => {
               />
             )}
           </h1>
-          {menuData.map((items) => {
-            return (
-              togglees && (
-                <MenuItems
-                  key={items?.itemscard?.info.id}
-                  menuItemsData={items}
-                />
-              )
-            );
-          })}
+          {menuData &&
+            menuData.map((items) => {
+              return (
+                togglees && (
+                  <MenuItems
+                    key={items?.itemscard?.info.id}
+                    menuItemsData={items}
+                  />
+                )
+              );
+            })}
         </div>
       </div>
     </>

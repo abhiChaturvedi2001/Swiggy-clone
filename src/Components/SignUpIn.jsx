@@ -13,6 +13,7 @@ const SignUpIn = () => {
   const handle = () => {
     dispatch(handleCrossToggle());
   };
+
   return (
     <>
       <div
